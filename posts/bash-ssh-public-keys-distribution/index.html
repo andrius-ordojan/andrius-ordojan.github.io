@@ -1,48 +1,64 @@
 <!doctype html>
-<html lang="en" >
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     
-    <title>Andrius Ordojan</title>
-    
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/agate.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     
-    <link rel="stylesheet" href="style.css">
+    <title>Andrius Ordojan</title>
+
+    <link rel="stylesheet" href="../../style.css">
   </head>
-
+  
   <body>
+    <header id="navbar" class="container">
+      <nav>
+        <ul>
+          <li><a href="/" class="logo">Andrius Ordojan</a></li>
+        </ul>
+        <ul>
+          <li><a href="#" id="theme_switcher"></a></li>
+        </ul>
+      </nav>
+    </header>
+    
     <main class="container">
-      <h1>SSH public Key distribution to remote servers using bash script</h1>
+      <h1 class="title">SSH public Key distribution to remote servers using bash script</h1>
 
-      <p>
-        The provided Bash script is designed to facilitate the addition of multiple SSH public keys to the authorized_keys file on a remote server. The PUBLIC_KEYS array contains individual strings, each representing a unique public key. The script establishes a connection to the remote server, iterates through the array, and appends each public key to the designated authorized_keys file. The user can customize the REMOTE_SERVER variable to specify the SSH username and IP address of the target server. Additionally, the script provides flexibility to include or remove public keys as needed, offering a straightforward solution for managing SSH access on a remote server.
-      </p>
+      <div class="divider"></div>
+
+      <div class="content">
+        <p>
+          The provided Bash script is designed to facilitate the addition of multiple SSH public keys to the <code>authorized_keys</code> file on a remote server. The <code>PUBLIC_KEYS</code> array contains individual strings, each representing a unique public key. The script establishes a connection to the remote server, iterates through the array, and appends each public key to the designated <code>authorized_keys</code> file. The user can customize the <code>REMOTE_SERVER</code> variable to specify the SSH username and IP address of the target server. 
+        </p>
 
         <pre>
           <code class="language-bash">
-            #!/bin/bash
-            # Remote server details
-            REMOTE_SERVER="your_username@your_remote_server_ip"
+          #!/bin/bash
+          # Remote server details
+          REMOTE_SERVER="your_username@your_remote_server_ip"
             AUTHORIZED_KEYS_FILE="$HOME/.ssh/authorized_keys"
             # Public keys to be added
             PUBLIC_KEYS=(
-                "keys"
-                "more keys..."
-            )
-            # Loop through each public key and append it to the authorized_keys file on the remote server
-            for key in "${PUBLIC_KEYS[@]}"; do
-                ssh "$REMOTE_SERVER" "echo '$key' >> $AUTHORIZED_KEYS_FILE"
-            done
-            # Display a message indicating success
-            echo "Public keys have been added to $REMOTE_SERVER:$AUTHORIZED_KEYS_FILE"
+              "keys"
+              "more keys..."
+              )
+              # Loop through each public key and append it to the authorized_keys file on the remote server 
+              for key in "${PUBLIC_KEYS[@]}"; do
+              ssh "$REMOTE_SERVER" "echo '$key' >> $AUTHORIZED_KEYS_FILE"
+              done
+              # Display a message indicating success
+              echo "Public keys have been added to $REMOTE_SERVER:$AUTHORIZED_KEYS_FILE"
           </code>
         </pre>
+      </div>
     </main>
-  </body>
+
+    <script src="./../../script.js"></script>
+  </body>  
 </html>

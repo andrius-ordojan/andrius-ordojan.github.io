@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" >
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,23 +7,36 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     
     <title>Andrius Ordojan</title>
-    
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-    
+
     <link rel="stylesheet" href="style.css">
   </head>
-
+  
   <body>
+    <header id="navbar" class="container">
+      <nav>
+        <ul>
+          <li><a href="/" class="logo">Andrius Ordojan</a></li>
+        </ul>
+        <ul>
+          <li><a href="#" id="theme_switcher"></a></li>
+        </ul>
+      </nav>
+    </header>
+    
     <main class="container">
-      <ul>
+      <h1 class="title">Posts</h1>
+
+      <div class="divider"></div>
+
+      <ul class="content">
         <li>
-          <a href="posts/bash-ssh-public-keys-distribution/">SSH public Key distribution to remote servers using bash script
+          <a href="posts/bash-ssh-public-keys-distribution/">
+            SSH public Key distribution to remote servers using bash script
           </a>
         </li>
       </ul>
     </main>
+
+    <script src="script.js"></script>
   </body>
 </html>
