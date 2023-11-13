@@ -24,29 +24,25 @@
         The provided Bash script is designed to facilitate the addition of multiple SSH public keys to the authorized_keys file on a remote server. The PUBLIC_KEYS array contains individual strings, each representing a unique public key. The script establishes a connection to the remote server, iterates through the array, and appends each public key to the designated authorized_keys file. The user can customize the REMOTE_SERVER variable to specify the SSH username and IP address of the target server. Additionally, the script provides flexibility to include or remove public keys as needed, offering a straightforward solution for managing SSH access on a remote server.
       </p>
 
-      <pre>
-        <code class="language-bash">
-          #!/bin/bash
-
-          # Remote server details
-          REMOTE_SERVER="your_username@your_remote_server_ip"
-          AUTHORIZED_KEYS_FILE="$HOME/.ssh/authorized_keys"
-
-          # Public keys to be added
-          PUBLIC_KEYS=(
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIzRXofDLn/YHzJOEyDnEOWGfx7dp3ephCTgbWPnzhF andrius.or@gmail.com"
-              "more keys..."
-          )
-
-          # Loop through each public key and append it to the authorized_keys file on the remote server
-          for key in "${PUBLIC_KEYS[@]}"; do
-              ssh "$REMOTE_SERVER" "echo '$key' >> $AUTHORIZED_KEYS_FILE"
-          done
-
-          # Display a message indicating success
-          echo "Public keys have been added to $REMOTE_SERVER:$AUTHORIZED_KEYS_FILE"
-        </code>
-      </pre>
+        <pre>
+          <code class="language-bash">
+            #!/bin/bash
+            # Remote server details
+            REMOTE_SERVER="your_username@your_remote_server_ip"
+            AUTHORIZED_KEYS_FILE="$HOME/.ssh/authorized_keys"
+            # Public keys to be added
+            PUBLIC_KEYS=(
+                "keys"
+                "more keys..."
+            )
+            # Loop through each public key and append it to the authorized_keys file on the remote server
+            for key in "${PUBLIC_KEYS[@]}"; do
+                ssh "$REMOTE_SERVER" "echo '$key' >> $AUTHORIZED_KEYS_FILE"
+            done
+            # Display a message indicating success
+            echo "Public keys have been added to $REMOTE_SERVER:$AUTHORIZED_KEYS_FILE"
+          </code>
+        </pre>
     </main>
   </body>
 </html>
