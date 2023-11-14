@@ -55,3 +55,7 @@ header nav li a svg {
 pre {
   background: var(--pre-background);
 }
+
+pre code.hljs {
+  margin-left: 60px;
+}
