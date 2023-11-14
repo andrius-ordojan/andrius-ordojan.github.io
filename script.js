@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (isLight) {
       switchTheme.innerHTML = sun
-      github.src = 'static/github-mark.svg';
+      github.src = '/static/github-mark.svg';
     } else {
       switchTheme.innerHTML = moon
-      github.src = 'static/github-mark-white.svg';
+      github.src = '/static/github-mark-white.svg';
     }
   } else {
     html.setAttribute('data-theme', 'auto')
