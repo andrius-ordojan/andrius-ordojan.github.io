@@ -46,19 +46,19 @@
           <code class="language-bash">
 #!/bin/bash
 # Remote server details
-            REMOTE_SERVER="your_username@your_remote_server_ip"
-            AUTHORIZED_KEYS_FILE="$HOME/.ssh/authorized_keys"
-            # Public keys to be added
-            PUBLIC_KEYS=(
-              "keys"
-              "more keys..."
-              )
-            # Loop through each public key and append it to the authorized_keys file on the remote server 
-            for key in "${PUBLIC_KEYS[@]}"; do
-            ssh "$REMOTE_SERVER" "echo '$key' >> $AUTHORIZED_KEYS_FILE"
-            done
-            # Display a message indicating success
-            echo "Public keys have been added to $REMOTE_SERVER:$AUTHORIZED_KEYS_FILE"
+REMOTE_SERVER="your_username@your_remote_server_ip"
+AUTHORIZED_KEYS_FILE="$HOME/.ssh/authorized_keys"
+# Public keys to be added
+PUBLIC_KEYS=(
+  "keys"
+  "more keys..."
+  )
+# Loop through each public key and append it to the authorized_keys file on the remote server 
+for key in "${PUBLIC_KEYS[@]}"; do
+ssh "$REMOTE_SERVER" "echo '$key' >> $AUTHORIZED_KEYS_FILE"
+done
+# Display a message indicating success
+echo "Public keys have been added to $REMOTE_SERVER:$AUTHORIZED_KEYS_FILE"
           </code>
         </pre>
       </div>
