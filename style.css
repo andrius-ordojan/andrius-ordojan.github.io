@@ -56,6 +56,8 @@ pre {
   background: var(--pre-background);
 }
 
-pre code.hljs {
-  padding-left: 60px;
+@media screen and (min-width: 768px) {
+  pre code.hljs {
+    padding-left: 60px; 
+  }
 }
