@@ -38,9 +38,10 @@ nav {
 margin-top: 30px;
 }
 
+header nav li a img,
 header nav li a svg {
-  width: var(--font-size);
-  height: var(--font-size);
+  width: 1.2rem;
+  height: 1.2rem;
   color: var(--contrast);
 }
 
