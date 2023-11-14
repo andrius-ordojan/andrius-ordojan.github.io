@@ -29,14 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 switchTheme.addEventListener('click', (e)=> {
   e.preventDefault()
-
+  
   isLight = !isLight
   if (isLight) {
     switchTheme.innerHTML = sun
-    github.src = 'static/github-mark.svg';
+    github.src = '/static/github-mark.svg';
   } else {
     switchTheme.innerHTML = moon
-    github.src = 'static/github-mark-white.svg';
+    github.src = '/static/github-mark-white.svg';
   }
 
   const currentTheme = isLight? 'light':'dark'

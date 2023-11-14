@@ -42,7 +42,7 @@ header nav li a img,
 header nav li a svg {
   width:  1.1rem;
   height: 1.1rem;
-  margin: 2px;
+  margin: 3px;
   color: var(--contrast);
 }
 
