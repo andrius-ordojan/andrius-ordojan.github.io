@@ -24,16 +24,6 @@ nav {
   margin-bottom: 15px;
 }
 
-[data-theme="light"]
-.title {
-  color: darkslategray;
-}
-
-[data-theme="dark"]
-.title {
-  color: lightgray;
-}
-
 .content {
   margin-top: 30px;
 }
