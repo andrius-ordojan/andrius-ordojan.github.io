@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  andrius-ordojan-website:
+    image: nginx:alpine
+    container_name: andrius-ordojan-website
+    ports:
+      - "80:80"
+    volumes:
+      - .:/usr/share/nginx/html
