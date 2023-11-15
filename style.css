@@ -10,8 +10,8 @@ nav {
 }
 
 .container {
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .divider {
@@ -35,7 +35,7 @@ nav {
 }
 
 .content {
-margin-top: 30px;
+  margin-top: 30px;
 }
 
 header nav li a img,
