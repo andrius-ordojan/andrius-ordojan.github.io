@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Andrius Ordojan personal website">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/agate.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <title>Andrius Ordojan</title>
+    
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  
+  <body>
+    <header id="navbar" class="container">
+      <nav>
+        <ul>
+          <li><a href="/" class="logo">Andrius Ordojan</a></li>
+        </ul>
+        <ul>
+          <li>
+            <a id="github" href="https://github.com/andrius-ordojan">
+              <img src="/static/github-mark.svg" />
+            </a>
+          </li>
+          <li><a href="#" id="theme_switcher"></a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <main class="container">
+      <h1 class="title">Configuring Ubuntu server and GitHub Actions for seamless CI/CD pipelines</h1>
+
+      <div class="divider"></div>
+
+      <div class="content">
+        <h2>On the server</h2>
+        <p>
+          The script automates the setup of a new user named "automation", adds it to the "automation" group, generates an SSH key pair, appends the public key to the user's authorized_keys file, fetches and appends the RSA public key of GitHub to the user's known_hosts file for secure SSH connections.
+        </p>
+
+        <pre>
+          <code class="language-bash">
+#!/bin/bash
+
+# Create user
+sudo adduser automation
+sudo usermod -aG automation automation
+
+# Generate SSH key on server
+sudo -u automation ssh-keygen -t ed25519 -C 'your_email@example.com' -f /home/automation/.ssh/id_ed25519
+
+# Add public key to authorized_keys file
+sudo -u automation sh -c 'cat /home/automation/.ssh/id_ed25519.pub >> /home/automation/.ssh/authorized_keys'
+sudo chmod 700 /home/automation/.ssh
+sudo chmod 600 /home/automation/.ssh/authorized_keys
+
+# Add GitHub to known hosts
+sudo -u automation ssh-keyscan -t rsa github.com >> /home/automation/.ssh/known_hosts
+          </code>
+        </pre>
+
+        <h2>On GitHub</h2>
+
+        <p>Add the public key generated on the server to the GitHub repository as a deploy key. This allows the GitHub Actions runner to clone the repository.</p>
+        <code>Settings > Deploy Keys > Add deploy key</code>
+
+        <p>Add the private key generated on the server to the GitHub repository as a secret. This private key is later used by the GitHub Actions workflow for secure authentication.</p>
+        <code>Settings > Secrets > New repository secret</code>
+
+        <h3>Configure an Action</h3>
+        <p>Set up the SSH key on the GitHub Actions runner, allowing it to authenticate with the server. Additionally, fetch and append the RSA public key of the server to the known hosts.</p>
+
+        <p>Test by cloning the specified repository on the server using the configured SSH key.</p>
+
+        <p>Remove the SSH key from the GitHub Actions runner after it has been used. This might not be needed.</p>
+
+        <pre>
+          <code class="language-yaml">
+- name: Set Up SSH Key
+  env:
+    SSH_KEY: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
+  run: |
+    mkdir -p ~/.ssh/
+    echo "$SSH_KEY" > ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    ssh-keyscan -t rsa -p 2954 23.88.57.249 >> ~/.ssh/known_hosts
+
+- name: Test Deploy
+  run: |
+    ssh automation@23.88.57.249 -p 2954 'git clone git@github.com:andrius-ordojan/sundhedsfeedback-web.git'
+
+- name: Remove SSH Key
+  run: |
+    rm -f ~/.ssh/id_rsa
+          </code>
+        </pre>
+      </div>
+    </main>
+
+    <script src="/script.js"></script>
+  </body>  
+</html>
