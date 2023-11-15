@@ -39,13 +39,12 @@
       <div class="divider"></div>
 
       <div class="content">
-        <h2>On the server</h2>
-        <p>
-          The script automates the setup of a new user named "automation", adds it to the "automation" group, generates an SSH key pair, appends the public key to the user's authorized_keys file, fetches and appends the RSA public key of GitHub to the user's known_hosts file for secure SSH connections.
-        </p>
-
-        <pre>
-          <code class="language-bash">
+          <h2>On the server</h2>
+          <p>
+            The script automates the setup of a new user named "automation", adds it to the "automation" group, generates an SSH key pair, appends the public key to the user's authorized_keys file, fetches and appends the RSA public key of GitHub to the user's known_hosts file for secure SSH connections.
+          </p>
+          <pre>
+            <code class="language-bash">
 #!/bin/bash
 
 # Create user
@@ -62,23 +61,21 @@ sudo chmod 600 /home/automation/.ssh/authorized_keys
 
 # Add GitHub to known hosts
 sudo -u automation ssh-keyscan -t rsa github.com >> /home/automation/.ssh/known_hosts
-          </code>
-        </pre>
+            </code>
+          </pre>
 
-        <h2>On GitHub</h2>
+          <h2>On GitHub</h2>
 
-        <p>Add the public key generated on the server to the GitHub repository as a deploy key. This allows the GitHub Actions runner to clone the repository.</p>
-        <code>Settings > Deploy Keys > Add deploy key</code>
+          <p>Add the public key generated on the server to the GitHub repository as a deploy key. This allows the GitHub Actions runner to clone the repository.</p>
+          <tt>Settings > Deploy Keys > Add deploy key</tt>
+          
+          <p>Add the private key generated on the server to the GitHub repository as a secret. This private key is later used by the GitHub Actions workflow for secure authentication.</p>
+          <tt>Settings > Secrets > New repository secret</tt>
 
-        <p>Add the private key generated on the server to the GitHub repository as a secret. This private key is later used by the GitHub Actions workflow for secure authentication.</p>
-        <code>Settings > Secrets > New repository secret</code>
-
-        <h3>Configure an Action</h3>
-        <p>Set up the SSH key on the GitHub Actions runner, allowing it to authenticate with the server. Additionally, fetch and append the RSA public key of the server to the known hosts.</p>
-
-        <p>Test by cloning the specified repository on the server using the configured SSH key.</p>
-
-        <p>Remove the SSH key from the GitHub Actions runner after it has been used. This might not be needed.</p>
+          <h3>Configure an Action</h3>
+          <p>Set up the SSH key on the GitHub Actions runner, allowing it to authenticate with the server. Additionally, fetch and append the RSA public key of the server to the known hosts.</p>
+          <p>Test by cloning the specified repository on the server using the configured SSH key.</p>
+          <p>Remove the SSH key from the GitHub Actions runner after it has been used. This might not be needed.</p>
 
         <pre>
           <code class="language-yaml">
