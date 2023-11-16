@@ -86,11 +86,11 @@ sudo -u automation ssh-keyscan -t rsa github.com >> /home/automation/.ssh/known_
     mkdir -p ~/.ssh/
     echo "$SSH_KEY" > ~/.ssh/id_rsa
     chmod 600 ~/.ssh/id_rsa
-    ssh-keyscan -t rsa -p 2954 23.88.57.249 >> ~/.ssh/known_hosts
+    ssh-keyscan -t rsa <SERVER IP> >> ~/.ssh/known_hosts
 
 - name: Test Deploy
   run: |
-    ssh automation@23.88.57.249 -p 2954 'git clone git@github.com:andrius-ordojan/sundhedsfeedback-web.git'
+    ssh automation@<SERVER IP> 'git clone <REPOSITORY>'
 
 - name: Remove SSH Key
   run: |
